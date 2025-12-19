@@ -13,3 +13,29 @@ vim.keymap.set(
   require("telescope.builtin").resume,
   { noremap = true, silent = true, desc = "Resume" }
 )
+
+-- move line up/down in normal mode
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+
+-- move selected lines in visual mode
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+
+-- vim.keymap.set(
+--   "n",
+--   "<leader>cD",
+--   require("snacks").dashboard.open,
+--   { noremap = true, silent = true, desc = "Open Snacks Dashboard" }
+-- )
+--
+vim.keymap.set("n", "<leader>cD", function()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.bo[buf].filetype == "snacks_dashboard" then
+      return
+    end
+  end
+
+  require("snacks").dashboard.open()
+end, { noremap = true, silent = true, desc = "Open Snacks Dashboard" })
