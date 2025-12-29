@@ -39,3 +39,6 @@ vim.keymap.set("n", "<leader>cD", function()
 
   require("snacks").dashboard.open()
 end, { noremap = true, silent = true, desc = "Open Snacks Dashboard" })
+
+vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>")
